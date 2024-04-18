@@ -1,4 +1,7 @@
 import Image from 'next/image';
+import {Input} from '@nextui-org/input'
+import {Checkbox} from '@nextui-org/checkbox'
+import {Button} from '@nextui-org/button';
 
 export function LoginForm() {
   return (
@@ -15,24 +18,33 @@ export function LoginForm() {
         </div>
 
         <div className="lg:p-36 md:p-52 sm:20 p-8 w-full lg:w-1/2">
-            <h1 className="text-2xl font-semibold mb-4">Iniciar sesión</h1>
             <form action="#" method="POST">
                 <div className="mb-4">
-                    <label htmlFor="username" className="block text-gray-600">Usuario</label>
-                    <input type="text" id="username" name="username" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" placeholder='Ej: MARIO.ORDONEZ'/>
+                    <Input 
+                        isRequired
+                        type='text' 
+                        label='Usuario:' 
+                        placeholder='Ej: MARIO.ORDONEZ'
+                        variant='underlined'
+                        color='primary'
+                    />
                 </div>
         
                 <div className="mb-4">
-                    <label htmlFor="password" className="block text-gray-600">Contraseña</label>
-                    <input type="password" id="password" name="password" className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-500" />
+                    <Input 
+                        isRequired
+                        type='password' 
+                        label='Contraseña:'
+                        variant='underlined'
+                        color='primary'
+                    />
                 </div>
         
                 <div className="mb-4 flex items-center">
-                    <input type="checkbox" id="remember" name="remember" className="text-blue-500"/>
-                    <label htmlFor="remember" className="text-gray-600 ml-2">Recordar mi usuario</label>
+                    <Checkbox color='primary'>Recordar mi usuario</Checkbox>
                 </div>
-    
-                <button type="submit" className="bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-md py-2 px-4 w-full">Login</button>
+
+                <Button variant='flat' className='w-full' color='primary' size='lg'>Iniciar sesión</Button>
             </form>
         </div>
     </div>
