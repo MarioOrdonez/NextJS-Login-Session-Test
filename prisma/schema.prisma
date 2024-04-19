@@ -1,0 +1,68 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BocPerfiles {
+  codigo_perfil    Int                @id @default(autoincrement())
+  nombre_perfil    String?            @db.VarChar(200)
+  territorio       Int
+  canal            Int
+  padre_perfil     Int?
+  estado           Int
+  acceso_mi_calle  String?            @db.VarChar(10)
+  tbl_boc_usuarios BocUsuarios[]
+  
+  @@map("tbl_boc_perfiles")
+}
+
+model BocRoles {
+  codigo_rol       Int                @id @default(autoincrement())
+  nombre_rol       String             @db.VarChar(200)
+  estado           Int
+  tbl_boc_usuarios BocUsuarios[]
+  
+  @@map("tbl_boc_roles")
+}
+
+model BocUsuarios {
+  codigo_usuario      Int              @id @default(autoincrement())
+  nombres             String           @db.VarChar(200)
+  apellidos           String           @db.VarChar(200)
+  usuario             String?          @db.VarChar(100)
+  codigo_perfil       Int
+  nombre_pc           String?          @db.VarChar(100)
+  direccion_ip        String?          @db.VarChar(100)
+  telefono            String?          @db.VarChar(100)
+  correo              String           @db.VarChar(100)
+  tipo_usuario        Int
+  codigo_rol          Int
+  tipo_planilla       Int
+  estado              Int
+  advertencias        Int?
+  territorio          String?          @db.VarChar(1000)
+  numero_identidad    String?          @db.VarChar(50)
+  documento_identidad String?          @db.VarChar(50)
+  id_dms              Int?
+  fecha_creacion      DateTime?        @db.Date
+  usuario_modifica    String?          @db.VarChar(100)
+  pais                String?          @db.Char(5)
+  acceso_mi_calle     String?          @db.VarChar(10)
+  contrasena          String?          @db.VarChar(200)
+  tbl_boc_perfiles    BocPerfiles @relation(fields: [codigo_perfil], references: [codigo_perfil], onDelete: NoAction, onUpdate: NoAction)
+  tbl_boc_roles       BocRoles   @relation(fields: [codigo_rol], references: [codigo_rol], onDelete: NoAction, onUpdate: NoAction)
+  
+  @@map("tbl_boc_usuarios")
+}
+
+model Todo {
+  id          String   @id
+  description String
+  complete    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+}
