@@ -1,26 +1,31 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Providers } from './providers';
+import { ProviderSession, Providers } from './providers';
+import { auth } from "@/auth.config";
+import { redirect } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Iniciar sesión",
-  description: "Página de login para manejo de sesiones",
+  title: "Sales Operations",
+  description: "Página de inicio",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+    
+    return (
     <html lang="en" className="light">
       <body className={inter.className}>
-        <Providers>
-          {children}
-        </Providers>
+        <ProviderSession>
+          <Providers>
+            {children}
+          </Providers>
+        </ProviderSession>
       </body>
     </html>
   );

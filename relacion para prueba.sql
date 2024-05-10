@@ -1,6 +1,7 @@
 DROP TABLE TBL_BOC_PERFILES;
 DROP TABLE TBL_BOC_ROLES;
 DROP TABLE TBL_BOC_USUARIOS;
+DROP TABLE tbl_boc_permisos_x_perfil;
 
 CREATE TABLE TBL_BOC_PERFILES(
 	CODIGO_PERFIL SERIAL PRIMARY KEY,
@@ -68,6 +69,18 @@ INSERT INTO TBL_BOC_USUARIOS(NOMBRES,APELLIDOS,USUARIO,CODIGO_PERFIL,NOMBRE_PC,D
 VALUES('HESLER JARET','FERRERA VASQUEZ','HESLER.FERRERA',2,NULL,NULL,95894143,'hesler.ferrera@tigo.com.hn',1,2,1,1,null,'T1','0817199800256','Identidad',207121,current_timestamp,'ADMIN','HN','S','TEST3$');
 commit;
 
+CREATE TABLE tbl_boc_permisos_x_perfil(
+	CODIGO_PERMISO SERIAL PRIMARY KEY,
+	CODIGO_PERFIL VARCHAR(200),
+	USUARIO VARCHAR(100),
+	CODIGO_PAGINA INTEGER
+);
+
+INSERT INTO tbl_boc_permisos_x_perfil(CODIGO_PERFIL, CODIGO_PAGINA) VALUES(1,1200);
+INSERT INTO tbl_boc_permisos_x_perfil(CODIGO_PERFIL, CODIGO_PAGINA) VALUES(1,1201);
+INSERT INTO tbl_boc_permisos_x_perfil(CODIGO_PERFIL, CODIGO_PAGINA) VALUES(1,1202);
+INSERT INTO tbl_boc_permisos_x_perfil(CODIGO_PERFIL, CODIGO_PAGINA) VALUES(1,1203);
+
 select 	*
 from 	TBL_BOC_usuarios;
 
@@ -77,6 +90,8 @@ from 	tbl_boc_perfiles;
 select 	*
 from 	tbl_boc_roles;
 
+select 	*
+from 	tbl_boc_permisos_x_perfil;
 
 select 	a.usuario, a.correo, r.nombre_rol, a.contrasena
 from 	tbl_boc_usuarios a
